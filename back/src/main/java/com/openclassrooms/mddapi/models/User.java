@@ -2,8 +2,8 @@ package com.openclassrooms.mddapi.models;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -13,7 +13,10 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "user",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email"),
+    })
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Data
@@ -43,7 +46,7 @@ public class User {
             inverseJoinColumns = @JoinColumn( name = "topic_id" ) )
     private List<Topic> topics;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
