@@ -1,7 +1,5 @@
 package com.openclassrooms.mddapi.dto;
 
-import com.openclassrooms.mddapi.models.Comment;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,10 +22,10 @@ public class PostDto {
     private LocalDateTime createdAt;
 
     @NonNull
-    private String authorName; //Username du user
+    private String authorName; //Username of the user
 
     @NonNull
-    private String topicName; //Name du topic
+    private String topicName; //Name of the topic
 
     @NonNull
     private String content;

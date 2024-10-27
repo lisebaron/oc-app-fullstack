@@ -1,17 +1,11 @@
 package com.openclassrooms.mddapi.services;
 
-import com.openclassrooms.mddapi.exceptions.AuthenticationException;
 import com.openclassrooms.mddapi.exceptions.NotFoundException;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.TopicRepository;
 import com.openclassrooms.mddapi.repositories.UserRepository;
-import com.openclassrooms.mddapi.security.services.UserDetailsImpl;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.security.Principal;
 
 @Service
 public class UserService {
@@ -31,7 +25,7 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public User create(User user) {
+    public User save(User user) {
         return userRepository.save(user);
     }
 

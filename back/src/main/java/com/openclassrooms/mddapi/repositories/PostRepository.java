@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    // Method to retrieve posts by topic IDs
+    // Retrieves posts by topic IDs
     List<Post> findAllByTopicIdIn(List<Long> topicIds);
 }
