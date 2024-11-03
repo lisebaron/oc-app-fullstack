@@ -7,9 +7,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { GoBackComponent } from './components/go-back/go-back.component';
+import { FeedComponent } from './pages/feed/feed.component';
+import { TopicComponent } from './pages/topic/topic.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, GoBackComponent, FeedComponent, TopicComponent, ProfileComponent, PostDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

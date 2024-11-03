@@ -1,7 +1,8 @@
 <div class="center">
-  <img src="/assets/logo_p6.png" alt="logo" />
-  <h1>Welcome to MDD</h1>
-  <button mat-raised-button color="primary" (click)="start()">Commencer</button>
-  <button mat-raised-button color="primary" (click)="goTo('/login')">Se connecter</button>
-  <button mat-raised-button color="primary" (click)="goTo('/register')">S'inscrire</button>
+  <img class="d-flex-wrap" src="/assets/logo_p6.png" alt="logo" />
+
+  <div class="d-flex-wrap gap-40">
+    <button class="button button-secondary" (click)="goTo('/login')">Se connecter</button>
+    <button class="button button-secondary" (click)="goTo('/register')">S'inscrire</button>
+  </div>
 </div>
