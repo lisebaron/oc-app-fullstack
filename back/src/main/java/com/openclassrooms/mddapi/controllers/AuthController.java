@@ -82,7 +82,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmailOrUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final ResponseCookie jwtCookie = jwtUtils.generateJwtCookie((UserDetailsImpl) authentication.getPrincipal());
@@ -128,6 +128,6 @@ public class AuthController {
         }
         userService.save(user);
 
-        return userMapper.toUserDto(user); //TODO is this return needed ?
+        return userMapper.toUserDto(user);
     }
 }

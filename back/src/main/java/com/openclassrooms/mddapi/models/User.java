@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name = "user",
     uniqueConstraints = {
         @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "username"),
     })
 @EntityListeners(AuditingEntityListener.class)
 @Entity

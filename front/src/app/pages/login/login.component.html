@@ -1,14 +1,14 @@
 <div class="center">
     <app-go-back></app-go-back>
-    <form class="flex-column gap-20">
+    <form class="flex-column gap-20" [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <legend class="ta-center fsize-title">Se connecter</legend>
         <div class="flex-column">
             <label>E-mail ou Nom d'utilisateur</label>
-            <input class="input" type="text">
+            <input class="input" type="text" formControlName="emailOrUsername">
         </div>
         <div class="flex-column">
             <label>Mot de passe</label>
-            <input class="input" type="password">
+            <input class="input" type="password" formControlName="password">
         </div>
         <input class="m-auto button button-primary" type="submit" value="Se connecter">
     </form>

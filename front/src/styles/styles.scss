@@ -1,4 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --fs-title: 24px;
+    --fs-nav: 20px;
+    --fs-default: 16px;
+
+    --purple: #7763C5;
+}
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.button {
+    font-size: var(--fs-default);
+    border-radius: 8px;
+    padding: 10px 20px;
+    border: 0;
+    min-width: 150px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-secondary {
+    border: 1px solid black;
+    background: 0;
+}
+
+.button-primary {
+    background-color: var(--purple);
+    color: white;
+}
+
+.input { 
+    border-radius: 8px;
+    min-width: 250px;
+    padding: 0 10px;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.svg {
+    cursor: pointer;
+}
+
+.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.d-flex {
+    display: flex;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.d-flex-wrap {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+.gap-40 {
+    gap: 40px;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.fsize-title {
+    font-size: var(--fs-title);
+}
+.fsize-text {
+    font-size: var(--fs-default);
+}
+.fsize-nav {
+    font-size: var(--fs-nav);
+}
+
+.m-auto {
+    margin: auto;
+}
