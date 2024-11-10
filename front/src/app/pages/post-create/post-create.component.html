@@ -1,0 +1,14 @@
+<div *ngIf="topicIds">
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <legend class="ta-center fsize-title">Créer un nouvel article</legend>
+        <mat-form-field class="input">
+            <mat-label>Choose an option</mat-label>
+            <mat-select formControlName="topicId">
+                <mat-option *ngFor="let topicId of topicIds" [value]="topicId.id">{{topicId.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <input class="input" type="text" placeholder="Titre de l'article" formControlName="title">
+        <input class="input" type="text" placeholder="Contenu de l'article" formControlName="content">
+        <input class="m-auto button button-primary" type="submit" value="Créer">
+    </form>
+</div>

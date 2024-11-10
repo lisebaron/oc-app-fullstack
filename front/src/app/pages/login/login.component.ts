@@ -31,12 +31,13 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     if (this.loginForm.valid) {
       const loginData: LoginRequest = this.loginForm.value;
-      this.authService.login(loginData).subscribe({
+      this.authService.authenticate(loginData).subscribe({
         next: (response) => {
-          this.goTo("/topics")
+          this.authService.login();
+          this.goTo("/topics");
         },
         error: (error) => {
-          console.error('Login failed:', error);
+          console.error('Login failed: ', error);
         }
       });
     } else {

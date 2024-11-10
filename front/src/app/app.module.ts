@@ -14,9 +14,13 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { TopicComponent } from './pages/topic/topic.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PostCreateComponent } from './pages/post-create/post-create.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, GoBackComponent, FeedComponent, TopicComponent, ProfileComponent, PostDetailsComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, GoBackComponent, FeedComponent, TopicComponent, ProfileComponent, PostDetailsComponent, HeaderComponent, PostCreateComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +28,8 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
     MatButtonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

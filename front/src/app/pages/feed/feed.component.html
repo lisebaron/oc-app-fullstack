@@ -1,1 +1,6 @@
-<p>feed works!</p>
+<button class="button button-secondary" (click)="goToCreatePost()">Créer un article</button>
+<div *ngFor="let post of posts">
+    <div (click)="goToPost(post.id)">
+        {{post.title}}
+    </div>
+</div>

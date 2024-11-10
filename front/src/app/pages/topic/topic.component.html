@@ -1,5 +1,6 @@
 <div *ngFor="let topic of topics">
     <div>
         {{topic.name}}
+        <button (click)="subscribe(topic.id)">S'abonner</button>
     </div>
 </div>
