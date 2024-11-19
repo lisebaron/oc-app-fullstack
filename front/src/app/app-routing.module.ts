@@ -8,6 +8,7 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { PostCreateComponent } from './pages/post-create/post-create.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
@@ -25,14 +26,19 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'topics',
+    path: 'profile',
     canActivate: [AuthGuard],
-    component: TopicComponent
+    component: ProfileComponent
   },
   {
     path: 'feed',
     canActivate: [AuthGuard],
     component: FeedComponent
+  },
+  {
+    path: 'topics',
+    canActivate: [AuthGuard],
+    component: TopicComponent
   },
   {
     path: 'post/:id',

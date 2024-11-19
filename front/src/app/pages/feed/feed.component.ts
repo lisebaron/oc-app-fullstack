@@ -10,6 +10,7 @@ import { PostService } from 'src/app/services/post/post.service';
 })
 export class FeedComponent implements OnInit {
   posts!: Post[];
+  isSortByMostRecent : boolean = true;
 
   constructor(private postService: PostService,
     private router: Router,
@@ -23,6 +24,10 @@ export class FeedComponent implements OnInit {
     this.postService.getAll().subscribe({
       next: (posts: Post[]) => {
         this.posts = posts;
+        this.posts.map(post => ({
+          ...post,
+          createdAt: new Date(post.createdAt)
+        }));
       },
       error: (error) => {
         console.error('Error while fetching posts: ', error);
@@ -30,8 +35,9 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  goToPost(postId: number): void {
-    this.router.navigate(["post/" + postId]);
+  sort() {
+    this.posts = this.posts.reverse();
+    this.isSortByMostRecent = !this.isSortByMostRecent;
   }
 
   goToCreatePost() {

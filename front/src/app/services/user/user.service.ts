@@ -12,15 +12,13 @@ export class UserService {
 
   subscribe(topicId: number): Observable<any> {
     return this.http.put(
-      `${this.apiUrl}/subscribe/${topicId}`,
-      { withCredentials: true }
+      `${this.apiUrl}/subscribe/${topicId}`, {}, {withCredentials: true}
     );
   }
 
   unsubscribe(topicId: number): Observable<any> {
     return this.http.put(
-      `${this.apiUrl}/unsubscribe/${topicId}`,
-      { withCredentials: true }
+      `${this.apiUrl}/unsubscribe/${topicId}`, {}, {withCredentials: true}
     );
   }
 }

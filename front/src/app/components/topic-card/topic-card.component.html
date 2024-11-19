@@ -1,0 +1,6 @@
+<div class="p-15 bg-gray b-radius d-flex-column" *ngIf="topic">
+    <div class="bold fs-text mb-10">{{topic.name}}</div>
+    <div class="fs-small mb-10 line-clamp">Description : {{topic.description}}</div>
+    <button class="button cursor button-primary align-self-center" *ngIf="!isSub" (click)="subscribe(topic.id)">S'abonner</button>
+    <button class="button cursor button-primary align-self-center" *ngIf="isSub" (click)="unsubscribe(topic.id)">Se désabonner</button>
+</div>

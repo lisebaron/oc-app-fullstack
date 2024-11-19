@@ -1,4 +1,32 @@
 <div *ngIf="post">
-    {{post.title}}
-    {{post.content}}
+    <div class="d-flex-wrap gap-20 ml-20 mt-20">
+        <app-go-back></app-go-back>
+        <div class="bold fs-title">{{post.title}}</div>
+    </div>
+    
+    <div class="fs-nav m-15 ml-60-web d-flex-column gap-20">
+        <div class="d-flex-wrap gap-20">
+            <div>{{post.createdAt | date:'dd/MM/yyyy'}}</div>
+            <div>{{post.authorName}}</div>
+            <div>{{post.topicName}}</div>
+        </div>
+        <div>
+            Contenu : {{post.content}}
+        </div>
+        <hr>
+        <div>
+            <div class="mb-20">Commentaires</div>
+            <div *ngFor="let comment of post.comments">
+                <div class="d-flex gap-15 ml-40 mb-10 comment-card">
+                    {{comment.username}}
+                    <div class="bg-gray p-15 b-radius">{{comment.content}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <form class="d-flex-align-justify-center gap-20 pos-sticky-bottom" [formGroup]="commentForm" (ngSubmit)="createComment()">
+        <textarea class="input tarea-resize-none tarea p-15" formControlName="content" placeholder="Écrivez ici votre commentaire"></textarea>
+        <img class="cursor comment-send" src="assets/send.svg" alt="send" (click)="createComment()">
+    </form>
 </div>

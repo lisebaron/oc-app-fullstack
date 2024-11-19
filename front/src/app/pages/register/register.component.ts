@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import RegisterRequest from 'src/app/models/RegisterRequest';
+import UsernameResponse from 'src/app/models/UsernameResponse';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -35,9 +36,9 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       const registerData: RegisterRequest = this.registerForm.value;
       this.authService.register(registerData).subscribe({
-        next: () => {
-          this.authService.login();
-          this.goTo("/topics");
+        next: (res: UsernameResponse) => {
+          this.authService.login(res.username);
+          this.goTo("/feed");
         },
         error: (error) => {
           console.error('Register failed: ', error);

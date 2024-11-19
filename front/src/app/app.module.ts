@@ -18,9 +18,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { PostCreateComponent } from './pages/post-create/post-create.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { TopicCardComponent } from './components/topic-card/topic-card.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, GoBackComponent, FeedComponent, TopicComponent, ProfileComponent, PostDetailsComponent, HeaderComponent, PostCreateComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, GoBackComponent, FeedComponent, TopicComponent, ProfileComponent, PostDetailsComponent, HeaderComponent, PostCreateComponent, TopicCardComponent, PostCardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import LoginRequest from 'src/app/models/LoginRequest';
 import { Router } from '@angular/router';
+import UsernameResponse from 'src/app/models/UsernameResponse';
 
 @Component({
   selector: 'app-login',
@@ -32,9 +33,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const loginData: LoginRequest = this.loginForm.value;
       this.authService.authenticate(loginData).subscribe({
-        next: (response) => {
-          this.authService.login();
-          this.goTo("/topics");
+        next: (res: UsernameResponse) => {
+          this.authService.login(res.username);
+          this.goTo("/feed");
         },
         error: (error) => {
           console.error('Login failed: ', error);

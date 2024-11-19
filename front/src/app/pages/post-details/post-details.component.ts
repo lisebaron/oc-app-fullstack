@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import Comment from 'src/app/models/Comment';
+import CommentRequest from 'src/app/models/CommentRequest';
 import Post from 'src/app/models/Post';
+import { CommentService } from 'src/app/services/comment/comment.service';
 import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
@@ -10,14 +14,25 @@ import { PostService } from 'src/app/services/post/post.service';
 })
 export class PostDetailsComponent implements OnInit {
   post!: Post;
+  commentForm!: FormGroup;
 
   constructor(private route: ActivatedRoute,
-    private postService: PostService
-  ) { }
+    private fb: FormBuilder,
+    private postService: PostService,
+    private commentService: CommentService,
+  ) {
+    this.formInit();
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.getPost(params["id"]);
+    });
+  }
+
+  formInit(): void {
+    this.commentForm = this.fb.group({
+      content: ['', [Validators.required]],
     });
   }
 
@@ -29,7 +44,20 @@ export class PostDetailsComponent implements OnInit {
       error: (error) => {
         console.error('Error while fetching post details: ', error);
       }
-    })
+    });
   }
 
+  createComment() {
+    if (this.commentForm.valid) {
+      const formData: CommentRequest = this.commentForm.value;
+      this.commentService.create(this.post.id,formData).subscribe({
+        next: (comment: Comment) => {
+          this.post.comments.push(comment);
+        },
+        error: (error) => {
+          console.error('Error while creating comment: ', error);
+        }
+      });
+    }
+  }
 }

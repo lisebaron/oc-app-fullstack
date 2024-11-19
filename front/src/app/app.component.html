@@ -1,2 +1,13 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+
+<mat-drawer-container>
+    <mat-drawer class="drawer" #drawer mode="over" position="end">
+        <div class="d-flex-column gap-20 p-15 align-items-f-end mt-40">
+            <a class="fs-nav cursor" (click)="goTo('/feed')">Articles</a>
+            <a class="fs-nav cursor" (click)="goTo('/topics')">Thèmes</a>
+            <a class="fs-nav cursor absolute-bottom-right" (click)="goTo('/profile')"><img class="cursor p-15" src="assets/account.svg" alt="account icon"></a>
+        </div>
+    </mat-drawer>
+    <app-header (toggleDrawer)="toggleDrawer()"></app-header>
+    <router-outlet></router-outlet>
+  
+</mat-drawer-container>

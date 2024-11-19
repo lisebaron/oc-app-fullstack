@@ -1,19 +1,18 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exceptions.EmailAlreadyInUseException;
-import com.openclassrooms.mddapi.exceptions.NotFoundException;
+import com.openclassrooms.mddapi.exceptions.UsernameAlreadyInUseException;
 import com.openclassrooms.mddapi.mappers.UserMapper;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.request.LoginRequest;
 import com.openclassrooms.mddapi.payload.request.SignUpRequest;
 import com.openclassrooms.mddapi.payload.request.UserInfosRequest;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
+import com.openclassrooms.mddapi.payload.response.UsernameResponse;
 import com.openclassrooms.mddapi.security.services.UserDetailsImpl;
 import com.openclassrooms.mddapi.services.UserService;
 import com.openclassrooms.mddapi.utils.JwtUtils;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,13 +46,16 @@ public class AuthController {
     /**
      * Registers a new user based on the provided signup request.
      * @param signUpRequest the signup request containing the user's information
-     * @return ResponseEntity containing JWT response upon successful registration
+     * @return ResponseEntity containing the username upon successful registration
      * @throws EmailAlreadyInUseException if the email provided is already registered
      */
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(final @Valid @RequestBody SignUpRequest signUpRequest) {
         if (userService.existsByEmail(signUpRequest.getEmail())) {
             throw new EmailAlreadyInUseException("Email already exists.");
+        }
+        if (userService.existsByUsername(signUpRequest.getUsername())) {
+            throw new UsernameAlreadyInUseException("Username already exists.");
         }
 
         final User user = User.builder()
@@ -70,13 +72,13 @@ public class AuthController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .build();
+                .body(new UsernameResponse(user.getUsername()));
     }
 
     /**
      * Authenticates a user based on the provided login request.
      * @param loginRequest the login request containing the user's information
-     * @return ResponseEntity containing JWT response upon successful authentication
+     * @return ResponseEntity containing the username upon successful authentication
      * @throws EmailAlreadyInUseException if the email provided is already registered
      */
     @PostMapping("/login")
@@ -87,9 +89,10 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final ResponseCookie jwtCookie = jwtUtils.generateJwtCookie((UserDetailsImpl) authentication.getPrincipal());
 
+        String username = userService.getUserByEmailOrUsername(((UserDetailsImpl) authentication.getPrincipal()).getUsername()).getUsername();
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .build();
+                .body(new UsernameResponse(username));
     }
 
     @PostMapping("/logout")
@@ -101,22 +104,14 @@ public class AuthController {
                 .body(new MessageResponse("Disconnected Successfully !"));
     }
 
-    /**
-     * Retrieves the user based on the authenticated principal.
-     * @param principal the authenticated principal representing the user
-     * @return the DTO representation of the user
-     * @throws NotFoundException if the user is not found
-     */
     @GetMapping("/me")
-    @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserInfos(final Principal principal) {
+    public ResponseEntity<?> getUserInfos(final Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
-        return userMapper.toUserDto(user);
+        return ResponseEntity.ok().body(userMapper.toUserDto(user));
     }
 
     @PutMapping("/me")
-    @ResponseStatus(HttpStatus.OK)
-    public UserDto EditUserInfos(@Valid @RequestBody UserInfosRequest userInfosRequest, final Principal principal) {
+    public ResponseEntity<?> EditUserInfos(@Valid @RequestBody UserInfosRequest userInfosRequest, final Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
 
         if (userInfosRequest.getEmail() != null) {
@@ -128,6 +123,6 @@ public class AuthController {
         }
         userService.save(user);
 
-        return userMapper.toUserDto(user);
+        return ResponseEntity.ok().body(userMapper.toUserDto(user));
     }
 }

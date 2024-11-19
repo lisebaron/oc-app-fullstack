@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import LoginRequest from 'src/app/models/LoginRequest';
 import RegisterRequest from 'src/app/models/RegisterRequest';
+import userInfosRequest from 'src/app/models/UserInfosRequest';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,9 @@ import RegisterRequest from 'src/app/models/RegisterRequest';
 export class AuthService {
   private apiUrl = 'http://localhost:3001/api/auth';
   
-  private isLogged = false;
-
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,
+    private router: Router,
+  ) { }
 
   authenticate(loginRequest: LoginRequest): Observable<any> {
     return this.http.post(
@@ -26,12 +28,12 @@ export class AuthService {
     return this.http.post(
       `${this.apiUrl}/register`,
       registerRequest,
-      {withCredentials: true}
-    )
+      { withCredentials: true }
+    );
   }
 
-  login() {
-    this.isLogged = true;
+  login(username: string) {
+    localStorage.setItem("username", username);
   }
 
   logout() {
@@ -39,11 +41,23 @@ export class AuthService {
       `${this.apiUrl}/logout`,
       { withCredentials: true }
     ).subscribe(() => {
-      this.isLogged = false;
-    })
+      this.router.navigate(['']);
+      localStorage.removeItem("username");
+    });
   }
 
-  getIsLogged() {
-    return this.isLogged;
+  getUserInfos(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}/me`,
+      { withCredentials: true }
+    );
+  }
+
+  updateUserInfos(userInfosRequest: userInfosRequest): Observable<any> {
+    return this.http.put(
+      `${this.apiUrl}/me`,
+      userInfosRequest,
+      { withCredentials: true }
+    );
   }
 }

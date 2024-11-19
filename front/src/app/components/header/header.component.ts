@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +7,22 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isEnabled: boolean = true;
+  @Output() toggleDrawer = new EventEmitter<void>();
+  currentRoute: string = '';
 
   constructor(private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects;
+      }
+    });
+  }
+
+  onToggleDrawer(): void {
+    this.toggleDrawer.emit();
   }
 
   goTo(route: string) {

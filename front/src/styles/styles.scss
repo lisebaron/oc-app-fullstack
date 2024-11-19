@@ -1,16 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* global styles */
 :root {
     --fs-title: 24px;
     --fs-nav: 20px;
     --fs-default: 16px;
+    --fs-small: 14px;
 
     --purple: #7763C5;
+    --red: #A40F0F;
+    --gray: #F5F5F5;
+}
+
+mat-drawer-container {
+    height: 100%;
 }
 
 html, body { height: 100%; }
 body {
+    min-height: 100%;
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Inter, "Helvetica Neue", sans-serif;
 }
 
 .button {
@@ -19,55 +27,125 @@ body {
     padding: 10px 20px;
     border: 0;
     min-width: 150px;
-    font-weight: bold;
-    cursor: pointer;
+    text-align: center;
 }
-
 .button-secondary {
     border: 1px solid black;
     background: 0;
 }
-
 .button-primary {
     background-color: var(--purple);
+    font-weight: bold;
     color: white;
+}
+
+.cursor {
+    cursor: pointer;
 }
 
 .input { 
     border-radius: 8px;
-    min-width: 250px;
+    width: 250px;
     padding: 0 10px;
     height: 40px;
     border: 1px solid black;
 }
 
-.svg {
-    cursor: pointer;
+.drawer {
+    width: 150px;
+}
+
+.bg-gray {
+    background-color: var(--gray);
+}
+
+.purple { color: var(--purple); }
+.red { color: var(--red); }
+
+.border-purple {
+    border-color: var(--purple);
+}
+.b-radius {
+    border-radius: 8px;
+}
+.border-bottom-black {
+    border: 1px solid black;
+    border-width: 0 0 1px 0;
+}
+
+.logo-size-nav {
+    width: 140px;
 }
 
 .center {
-    height: 100vh;
+    min-height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
+.d-none {
+    display: none;
+}
 .d-flex {
     display: flex;
 }
-.flex-column {
+.d-flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+.d-flex-column {
     display: flex;
     flex-direction: column;
 }
 .d-flex-wrap {
-    justify-content: center;
     display: flex;
     flex-wrap: wrap;
 }
 
+.d-flex-center {
+    display: flex;
+    justify-content: center;
+}
+.d-flex-align-justify-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+.align-self-center {
+    align-self: center;
+}
+.align-items-f-end {
+    align-items: flex-end;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.pos-sticky-bottom {
+    position: sticky;
+    bottom: 0;
+}
+
+.gap-15 {
+    gap: 15px;
+}
 .gap-20 {
     gap: 20px;
+}
+.gap-30 {
+    gap: 30px;
 }
 .gap-40 {
     gap: 40px;
@@ -77,16 +155,174 @@ body {
     text-align: center;
 }
 
-.fsize-title {
+.fs-title {
     font-size: var(--fs-title);
 }
-.fsize-text {
+.fs-text {
     font-size: var(--fs-default);
 }
-.fsize-nav {
+.fs-nav {
     font-size: var(--fs-nav);
+}
+.fs-small {
+    font-size: var(--fs-small);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.w-350 {
+    width: 350px;
 }
 
 .m-auto {
     margin: auto;
+}
+.m-15 {
+    margin: 15px;
+}
+.m-side-15 {
+    margin: 0 15px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-40 {
+    margin-top: 40px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.mt-15 {
+    margin-top: 15px;
+}
+.ml-20 {
+    margin-left: 20px;
+}
+.ml-40 {
+    margin-left: 40px;
+}
+.ml-60-web {
+    margin-left: 60px;
+}
+
+.p-15 {
+    padding: 15px;
+}
+
+hr {
+    margin: 0;
+    width: 80%;
+    background-color: black;
+    border: 0;
+    height: 1px;
+}
+
+.tarea-resize-none {
+    resize: none;
+}
+.tarea {
+    width: 600px;
+    height: 120px;
+}
+.tarea-small {
+    height: 140px;
+    line-height: 40px;
+}
+
+.absolute-bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.apart {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.float-left {
+    float: left;
+}
+.go-back-arrow {
+    float: left;
+    margin: 15px;
+}
+
+.logo {
+    width: 412px;
+}
+
+.fd-row-to-columns {
+    flex-direction: row;
+}
+
+.nav-mobile {
+    display: none;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (max-width: 500px) {
+    .fd-row-to-columns {
+        flex-direction: column;
+    }
+
+    .logo {
+        width: 225px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .apart {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-size-nav {
+        width: 90px;
+    }
+
+    .nav-web {
+        display: none;
+    }
+    .nav-mobile {
+        display: block;
+    }
+
+    .ml-60-web {
+        margin-left: 20px;
+    }
+
+    .comment-card {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: left;
+        align-items: flex-end;
+
+        .bg-gray {
+            background: 0;
+        }
+    }
+    
+    .comment-send {
+        position: absolute;
+        right: 0;
+        margin: 15px;
+    }
 }

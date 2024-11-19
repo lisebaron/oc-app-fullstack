@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.TopicRepository;
 import com.openclassrooms.mddapi.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,8 +22,18 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(NotFoundException::new);
     }
 
+    public User getUserByEmailOrUsername(String emailOrUsername) {
+        return userRepository.findByEmail(emailOrUsername)
+                .or(() -> userRepository.findByUsername(emailOrUsername))
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with email or username: " + emailOrUsername));
+    }
+
     public Boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public Boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 
     public User save(User user) {

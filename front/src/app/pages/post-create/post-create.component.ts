@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import PostRequest from 'src/app/models/PostRequest';
 import Topic from 'src/app/models/Topic';
 import { PostService } from 'src/app/services/post/post.service';
@@ -21,7 +22,8 @@ export class PostCreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private postService: PostService,
-    private topicService: TopicService
+    private topicService: TopicService,
+    private router: Router,
   ) { 
     this.formInit();
   }
@@ -56,7 +58,7 @@ export class PostCreateComponent implements OnInit {
       const formData: PostRequest = this.postForm.value;
       this.postService.create(formData).subscribe({
         next: () => {
-          console.log("created");
+          this.router.navigate(['/feed']);
         },
         error: (error) => {
           console.error('post creation failed: ', error);

@@ -6,6 +6,7 @@ import com.openclassrooms.mddapi.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -81,7 +82,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.antMatchers("/api/auth/me").authenticated()
                                 .antMatchers("/api/auth/**").permitAll()
-                                .antMatchers("/api/auth/me").permitAll()
+                                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 

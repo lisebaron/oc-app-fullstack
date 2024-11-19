@@ -1,14 +1,15 @@
-<div *ngIf="topicIds">
-    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-        <legend class="ta-center fsize-title">Créer un nouvel article</legend>
-        <mat-form-field class="input">
-            <mat-label>Choose an option</mat-label>
+<div class="mt-15 d-flex-wrap" *ngIf="topicIds">
+    <app-go-back class="float-left m-side-15"></app-go-back>
+    <form [formGroup]="postForm" class="m-auto d-flex-column align-items-center gap-20" (ngSubmit)="onSubmit()">
+        <legend class="fs-title">Créer un nouvel article</legend>
+        <mat-form-field class="input border-purple m-auto">
+            <mat-label>Sélectionner un thème</mat-label>
             <mat-select formControlName="topicId">
                 <mat-option *ngFor="let topicId of topicIds" [value]="topicId.id">{{topicId.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <input class="input" type="text" placeholder="Titre de l'article" formControlName="title">
-        <input class="input" type="text" placeholder="Contenu de l'article" formControlName="content">
-        <input class="m-auto button button-primary" type="submit" value="Créer">
+        <input class="input border-purple m-auto" type="text" placeholder="Titre de l'article" formControlName="title">
+        <textarea class="input border-purple m-auto tarea-resize-none tarea-small" type="text" placeholder="Contenu de l'article" formControlName="content"></textarea>
+        <input class="m-auto button button-primary m-auto cursor" type="submit" value="Créer">
     </form>
 </div>

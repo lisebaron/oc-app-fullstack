@@ -1,12 +1,12 @@
-<div class="center">
-    <app-go-back></app-go-back>
-    <form class="flex-column gap-20" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <legend class="ta-center fsize-title">Se connecter</legend>
-        <div class="flex-column">
+<div class="d-flex-column">
+    <app-go-back class="go-back-arrow"></app-go-back>
+    <form class="d-flex-column gap-20" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <legend class="ta-center fs-title">Se connecter</legend>
+        <div class="d-flex-column m-auto">
             <label>E-mail ou Nom d'utilisateur</label>
             <input class="input" type="text" formControlName="emailOrUsername">
         </div>
-        <div class="flex-column">
+        <div class="d-flex-column m-auto">
             <label>Mot de passe</label>
             <input class="input" type="password" formControlName="password">
         </div>
