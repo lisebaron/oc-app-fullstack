@@ -1,0 +1,14 @@
+<div class="m-15" *ngIf="profileForm">
+    <form class="d-flex-column gap-30 mb-10" [formGroup]="profileForm" (ngSubmit)="updateUserInfos()">
+        <legend class="ta-center fs-title bold">Profil utilisateur</legend>
+        <input class="input border-purple m-auto" type="text" formControlName="username">
+        <input class="input border-purple m-auto" type="email" formControlName="email">
+        <input class="m-auto button button-primary cursor" type="submit" value="Sauvegarder">
+    </form>
+    <div class="red mb-10 ta-center cursor" (click)="disconnect()">Se déconnecter</div>
+    <hr class="m-auto">
+    <div class="fs-title mt-15 bold ta-center">Abonnements</div>
+    <div *ngIf="user.topics" class="grid gap-15 m-15">
+        <app-topic-card *ngFor="let topic of user.topics" [topic]="topic" [isSub]="true"></app-topic-card>
+    </div>
+</div>

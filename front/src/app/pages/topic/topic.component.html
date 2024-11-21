@@ -1,0 +1,3 @@
+<div class="grid gap-15 m-15" *ngIf="topics && user">
+    <app-topic-card *ngFor="let topic of topics" [topic]="topic" [isSub]="checkUserIsSub(topic.id)"></app-topic-card>
+</div>

@@ -1,0 +1,15 @@
+<div [ngClass]="{'nav-web': currentRoute == '/login' || currentRoute == '/register' }" class="d-flex-between align-items-center border-bottom-black" *ngIf="currentRoute != '/'">
+    <img class="logo-size-nav" src="/assets/logo_p6.png" alt="logo" />
+    
+    <div *ngIf="currentRoute != '/login' && currentRoute != '/register'" class="d-flex gap-20">
+        <div class="d-flex gap-20 nav-web">
+            <a class="fs-nav cursor align-self-center" [ngClass]="{'purple' : currentRoute == '/feed'}" (click)="goTo('/feed')">Articles</a>
+            <a class="fs-nav cursor align-self-center" [ngClass]="{'purple' : currentRoute == '/topics'}" (click)="goTo('/topics')">Thèmes</a>
+            <a class="fs-nav cursor" (click)="goTo('/profile')">
+                <img *ngIf="currentRoute !== '/profile'" class="cursor p-15" src="assets/account.svg" alt="account icon">
+                <img *ngIf="currentRoute == '/profile'" class="cursor p-15" src="assets/account-active.svg" alt="account icon">
+            </a>
+        </div>
+        <img class="cursor p-15 nav-mobile" src="assets/menu.svg" alt="menu" (click)="onToggleDrawer()">
+    </div>
+</div>
